@@ -1,0 +1,3 @@
+rootProject.name = 'rideWfriends'
+
+include ':app'
