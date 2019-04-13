@@ -3,6 +3,7 @@ import {View, TextInput} from 'react-native';
 import MapView, { Callout } from 'react-native-maps'
 export default class App extends Component<Props> {
     state = {
+      searchTerm: '',
       latitude: 0,
       longitude: 0,
       styles: {
@@ -27,7 +28,7 @@ export default class App extends Component<Props> {
     }
     
     componentWillMount() {
-      console.log('mounted ')
+      console.log('will mount ')
       navigator.geolocation.getCurrentPosition(
         //Will give you the current location
         (position) => {
@@ -35,8 +36,8 @@ export default class App extends Component<Props> {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           });
-          console.log(this.state.latitude)
-          console.log(this.state.longitude)
+          console.log('lat: '+this.state.latitude)
+          console.log('long: '+this.state.longitude)
         },
         (error) => alert(error.message),
         { 
@@ -44,6 +45,9 @@ export default class App extends Component<Props> {
         }
      );
     }  
+    findNewLocation = newLocation => {
+      alert(newLocation)
+    }
   render() {
 
 
@@ -65,6 +69,9 @@ export default class App extends Component<Props> {
         <Callout>
     <View style={this.state.styles.calloutView} >
       <TextInput style={this.state.styles.calloutSearch}
+        onSubmitEditing={() => this.findNewLocation(this.state.searchTerm)}
+        onChangeText={(searchTerm) => this.setState({searchTerm})}
+        value={this.state.searchTerm}
         placeholder={"Search"}
       />
     </View>
