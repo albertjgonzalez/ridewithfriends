@@ -50,10 +50,15 @@ export default class App extends Component<Props> {
     }  
     findNewLocation = newLocation => {
 
-      Geocoder.from("Colosseum")
+      Geocoder.from(newLocation)
         .then(json => {
             var location = json.results[0].geometry.location;
             console.log(location);
+            this.setState({
+              latitude: location.lat,
+              longitude: location.lng
+            });
+            console.log(this.state.latitude)
         })
         .catch(error => console.warn(error));
     }
