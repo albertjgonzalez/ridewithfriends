@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {View, TextInput} from 'react-native';
-import MapView, { Callout } from 'react-native-maps'
+import MapView, { Callout } from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init('AIzaSyBqua7JcBoxRxZoKMZY5DqnnDUASr97IYM');
+
 export default class App extends Component<Props> {
     state = {
       searchTerm: '',
@@ -46,7 +49,13 @@ export default class App extends Component<Props> {
      );
     }  
     findNewLocation = newLocation => {
-      alert(newLocation)
+
+      Geocoder.from("Colosseum")
+        .then(json => {
+            var location = json.results[0].geometry.location;
+            console.log(location);
+        })
+        .catch(error => console.warn(error));
     }
   render() {
 

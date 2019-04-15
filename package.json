@@ -7,8 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "geocoder": "^0.2.3",
     "react": "16.6.3",
     "react-native": "0.58.5",
+    "react-native-geocoding": "^0.3.0",
     "react-native-maps": "^0.23.0"
   },
   "devDependencies": {
